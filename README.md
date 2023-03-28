@@ -1,4 +1,4 @@
-# ftech-csvtocode README
+# ftech-csvtocode
 
 This is the README for the "ftech-csvtocode" extension, which allows you to generate code bindings for CSV files by calling a web API. The generated bindings are opened in a new unnamed tab in the C# language format.
 
