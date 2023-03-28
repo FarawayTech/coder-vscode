@@ -1,7 +1,21 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import axios from 'axios';
+import { Response as NodeResponse } from "node-fetch";
+
+type CommonResponse = NodeResponse | Response;
+
+let commonFetch: (input: string, init?: any) => Promise<CommonResponse>;
+
+async function resolveFetch() {
+  if (typeof process === "object") {
+    commonFetch = (await import("node-fetch")).default;
+  } else {
+    commonFetch = fetch;
+  }
+}
+
+void resolveFetch();
 
 export function activate(context: vscode.ExtensionContext) {
     let disposable = vscode.commands.registerCommand('ftech-csvtocode.generateBindings', generateBindingsCommand);
@@ -61,8 +75,17 @@ async function generateBindingsCommand() {
     const apiUrl = 'https://coder.farawaytech.com/api/csvtocode';
 
     try {
-		const response = await axios.post(apiUrl, { "csvContent": csvContent });
-        return response.data;
+		const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ csvContent })
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error communicating with the Coder API: ${response.statusText}`);
+        }
+
+        return await response.text();
     } catch (error) {
         vscode.window.showErrorMessage(`Failed to process CSV: ${error}`);
         throw error;
