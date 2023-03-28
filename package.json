@@ -3,7 +3,7 @@
   "displayName": "FTech CSVtoCode",
   "description": "Generate C# code bindings for a CSV file",
   "publisher": "farawaytechnologies",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "engines": {
     "vscode": "^1.76.0"
   },
