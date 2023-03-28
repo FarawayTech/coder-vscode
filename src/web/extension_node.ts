@@ -1,7 +1,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-
+import fetch from "node-fetch";
 
 export function activate(context: vscode.ExtensionContext) {
     let disposable = vscode.commands.registerCommand('ftech-csvtocode.generateBindings', generateBindingsCommand);
@@ -11,39 +11,6 @@ export function activate(context: vscode.ExtensionContext) {
 
 // This method is called when your extension is deactivated
 export function deactivate() {}
-
-async function getFileContent(uri: vscode.Uri): Promise<string> {
-	const fileContent = await vscode.workspace.fs.readFile(uri);
-	return Buffer.from(fileContent).toString('utf-8');
-  }
-  
-  function displayResult(result: any) {
-	const panel = vscode.window.createWebviewPanel(
-	  'resultView',
-	  'C# Generated Code',
-	  vscode.ViewColumn.Two,
-	  {}
-	);
-	panel.webview.html = `
-	  <html>
-	  <head>
-		<style>
-		  body {
-			margin: 0;
-			padding: 0;
-			font-family: sans-serif;
-		  }
-		  pre {
-			white-space: pre-wrap;
-		  }
-		</style>
-	  </head>
-	  <body>
-		<pre>${JSON.stringify(result, null, 2)}</pre>
-	  </body>
-	  </html>
-	`;
-  }
 
 async function generateBindingsCommand() {
 	const editor = vscode.window.activeTextEditor;
