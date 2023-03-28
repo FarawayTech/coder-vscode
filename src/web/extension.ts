@@ -9,50 +9,12 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(disposable);
 }
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
-export function activate1(context: vscode.ExtensionContext) {
-
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Extension "ftech-csvtocode" is now active in the web extension host');
-
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('ftech-csvtocode.generateBindings', async (uri: vscode.Uri) => {
-		try {
-		  const fileContent = await getFileContent(uri);
-		  const result = await sendToAPI(fileContent);
-		  displayResult(result);
-		} catch (error) {
-		  vscode.window.showErrorMessage(`Failed to process CSV: ${error}`);
-		}
-	  });
-
-	context.subscriptions.push(disposable);
-}
-
 // This method is called when your extension is deactivated
 export function deactivate() {}
 
 async function getFileContent(uri: vscode.Uri): Promise<string> {
 	const fileContent = await vscode.workspace.fs.readFile(uri);
 	return Buffer.from(fileContent).toString('utf-8');
-  }
-  
-  async function sendToAPI(fileContent: string): Promise<any> {
-	const apiUrl = 'https://coder.farawaytech.com/api/csvtocode';
-	const options = {
-		method: 'POST',
-		headers: {
-		  'Content-Type': 'application/json',
-		},
-		body: JSON.stringify({ fileContent }),
-	  };
-	  const response = await fetch(apiUrl, options);
-	  const result = await response.json();
-	  return result;
   }
   
   function displayResult(result: any) {
