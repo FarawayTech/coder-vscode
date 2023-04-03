@@ -3,7 +3,7 @@
   "displayName": "FTech CSVtoCode",
   "description": "Generate code bindings for CSVs",
   "publisher": "farawaytechnologies",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "engines": {
     "vscode": "^1.76.0"
   },
