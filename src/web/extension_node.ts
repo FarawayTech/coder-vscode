@@ -5,33 +5,37 @@ import fetch from "node-fetch";
 
 export function activate(context: vscode.ExtensionContext) {
     let disposable = vscode.commands.registerCommand('ftech-csvtocode.generateBindings', generateBindingsCommand);
-
     context.subscriptions.push(disposable);
 }
 
 // This method is called when your extension is deactivated
-export function deactivate() {}
+export function deactivate() { }
 
 async function generateBindingsCommand() {
-	const editor = vscode.window.activeTextEditor;
-	if (!editor || editor.document.languageId !== 'csv') {
-		vscode.window.showErrorMessage('Please open a CSV file to generate bindings.');
-		return;
-	}
-	const csvContent = editor.document.getText();
-	const bindings = await generateBindings(csvContent);
-	const newFile = await vscode.workspace.openTextDocument({ content: bindings, language: 'csharp' });
-	vscode.window.showTextDocument(newFile);
+    const editor = vscode.window.activeTextEditor;
+    if (!editor || editor.document.languageId !== 'csv') {
+        vscode.window.showErrorMessage('Please open a CSV file to generate bindings.');
+        return;
+    }
+
+    const targetLanguage = vscode.workspace.getConfiguration('ftech-csvtocode')['language'];
+    const vsCodeLang = targetLanguage.toLowerCase().replace("#", "sharp");
+    vscode.window.showErrorMessage(`Lang: ${vsCodeLang}`);
+
+    const csvContent = editor.document.getText();
+    const bindings = await generateBindings(csvContent, vsCodeLang);
+    const newFile = await vscode.workspace.openTextDocument({ content: bindings, language: vsCodeLang });
+    vscode.window.showTextDocument(newFile);
 }
 
-  async function generateBindings(csvContent: string): Promise<string> {
+async function generateBindings(csvContent: string, language: string): Promise<string> {
     const apiUrl = 'https://coder.farawaytech.com/api/csvtocode';
 
     try {
-		const response = await fetch(apiUrl, {
+        const response = await fetch(apiUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ csvContent })
+            body: JSON.stringify({ csvContent, language })
         });
 
         if (!response.ok) {

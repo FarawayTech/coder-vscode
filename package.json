@@ -1,7 +1,7 @@
 {
   "name": "ftech-csvtocode",
   "displayName": "FTech CSVtoCode",
-  "description": "Generate C# code bindings for a CSV file",
+  "description": "Generate code bindings for CSVs",
   "publisher": "farawaytechnologies",
   "version": "1.0.7",
   "engines": {
@@ -30,10 +30,21 @@
   "browser": "./dist/web/extension.js",
   "main": "./dist/node/extension.js",
   "contributes": {
+    "configuration": {
+      "title": "Ftech CSV to Code",
+      "properties": {
+        "ftech-csvtocode.language": {
+          "type": "string",
+          "enum": ["C#", "Python", "Java", "Kotlin", "TypeScript"],
+          "default": "C#",
+          "description": "Target language for generated code bindings"
+        }
+      }
+    },
     "commands": [
       {
         "command": "ftech-csvtocode.generateBindings",
-        "title": "Generate C# Bindings for CSV"
+        "title": "Generate Bindings for CSV"
       }
     ],
     "menus": {
