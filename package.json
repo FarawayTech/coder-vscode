@@ -1,9 +1,9 @@
 {
   "name": "ftech-csvtocode",
   "displayName": "FTech CSVtoCode",
-  "description": "Generate code bindings for CSVs",
+  "description": "Generate code bindings for CSVs in C#",
   "publisher": "farawaytechnologies",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "engines": {
     "vscode": "^1.76.0"
   },
@@ -16,6 +16,7 @@
     "Other"
   ],
   "keywords": [
+    "c#",
     "csv",
     "code-generation",
     "bindings",
