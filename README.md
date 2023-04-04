@@ -8,8 +8,7 @@ The generated bindings are opened in a new unnamed tab in the C# language format
 * Generate code bindings for the currently opened CSV file.
 * Currently supports only C# as a target language
 
-https://user-images.githubusercontent.com/490130/229735345-3d0a429c-e12b-4f57-86e8-1d380b718714.mov
-
+![coder_vscode](https://user-images.githubusercontent.com/490130/229777991-00bed5b2-e744-44d8-a397-b52a7275d78c.gif)
 
 ## Extension Settings
 
