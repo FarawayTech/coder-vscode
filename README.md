@@ -1,23 +1,19 @@
-# ftech-csvtocode
+# FTech-CSVtoCode
 
-This is the README for the "ftech-csvtocode" extension, which allows you to generate code bindings for CSV files by calling a web API. The generated bindings are opened in a new unnamed tab in the C# language format.
+Generate code bindings for CSV files by calling a web API.
+The generated bindings are opened in a new unnamed tab in the C# language format.
 
 ## Features
 
-This extension provides a context menu item to generate code bindings for the currently opened CSV file.
+* Generate code bindings for the currently opened CSV file.
+* Currently supports only C# as a target language
 
-## Requirements
+https://user-images.githubusercontent.com/490130/229735345-3d0a429c-e12b-4f57-86e8-1d380b718714.mov
 
-* Visual Studio Code
-* Node.js (v14.x or later)
 
 ## Extension Settings
 
 This extension does not contribute any settings through the contributes.configuration extension point.
-
-## Known Issues
-
-No known issues at this time. If you encounter any problems, please report them as issues on the project's GitHub repository.
 
 ## Release Notes
 
@@ -26,3 +22,4 @@ No known issues at this time. If you encounter any problems, please report them 
 Initial release of ftech-csvtocode.
 
 ---
+
