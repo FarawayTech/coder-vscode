@@ -35,7 +35,7 @@
       "properties": {
         "ftech-csvtocode.language": {
           "type": "string",
-          "enum": ["C#", "Python", "Java", "Kotlin", "TypeScript"],
+          "enum": ["C#"],
           "default": "C#",
           "description": "Target language for generated code bindings"
         }
@@ -44,7 +44,8 @@
     "commands": [
       {
         "command": "ftech-csvtocode.generateBindings",
-        "title": "Generate Bindings for CSV"
+        "title": "Generate [C#] Bindings for CSV",
+        "icon": "$(code)"
       }
     ],
     "menus": {
